@@ -1,0 +1,122 @@
+{% extends "_base.html" %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/component.css' %}">
+
+
+
+	<div role="main" class="ui-content">
+    <!--<div id="mysliders">-->
+      <form>
+        <div class="row">
+          <div class="col">
+            <label for="slider-1">Виробник:</label>
+            <input class="form-control add" type="range" name="slider-1" id="slider-1" min="0" max="10" value="1" onchange="calcSum()" />
+            <output class="output" onchange="calcSum()">1</output> 
+         </div>
+         <div class="col">
+            <label for="slider-2"> Діагональ екрану:</label>
+            <input class="form-control add" type="range" name="slider-2" id="slider-2" min="0" max="10" value="1" onchange="calcSum()" />
+            <output class="output" onchange="calcSum()">1</output> 
+        </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="slider-3">Кількість ядер:</label>
+            <input class="form-control add" type="range" name="slider-3" id="slider-3" min="0" max="10" value="1" onchange="calcSum()" />
+            <output class="output" onchange="calcSum()">1</output> 
+          </div>
+          <div class="col">
+            <label for="slider-4">Пам'ять:</label>
+            <input class="form-control add" type="range" name="slider-4" id="slider-4" min="0" max="10" value="1" onchange="calcSum()"/>
+            <output class="output" onchange="calcSum()">1</output> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="slider-5">Камера:</label>
+            <input class="form-control add" type="range" name="slider-5" id="slider-5" min="0" max="10" value="1" onchange="calcSum()"/>
+            <output class="output" onchange="calcSum()">1</output> 
+          </div>
+          <div class="col">
+            <label for="slider-6">Ємкість аккумулятору:</label>
+            <input class="form-control add" type="range" name="slider-6" id="slider-6" min="0" max="10" value="1" onchange="calcSum()" />
+            <output class="output" onchange="calcSum()">1</output> 
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <label for="slider-7">Ціна:</label>
+            <input class="form-control add" type="range" name="slider-7" id="slider-7" min="0" max="10" value="1" onchange="calcSum()" />
+            <output class="output" onchange="calcSum()">1</output> 
+          </div>
+         
+          
+                <div class="col-6" >
+                  <button style="margin-top: 29px;margin-right: 300px;margin-left: 430px;" onclick='(new Click()).sumCalc(); (new Click()).get_hidden(); (new Click()).sum_el(); (new Click()).convert(); (new Click()).matrix(); (new Click()).matrix_depth(); (new Click()).range(); (new Click()).matrix_l(); (new Click()).matrix_mult(); (new Click()).conver_r(); (new Click()).convinction(); (new Click()).div_add();
+                  (new Click()).sort_result();' id='toggle-button' type='button' class="btn btn-primary d-inline">Підтвердити</button>
+                </div>
+              
+            </div>
+          </div>
+        </div>
+    </form>
+    </div>
+ 
+    <hr />
+ 
+  </div>
+  </div>
+
+
+ <div class="card-deck-wrapper target">
+  <!--<button class='action action-close' onClick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;" style="margin-left:1200px;"><i class="fa fa-remove"></i><span class="close">Закрыть</span></button> -->
+  <div class="card-deck" id='list'>
+     {% for phone in phones %}
+  <div class="card prod" style="width: 18rem;">
+  <img class="card-img-top" src="{{phone.image.url}}" alt="" style='width:220px;height:280px;'>
+  <div class="card-body">
+          <h5 class="card-title">{{phone.manufacture}}</h5>
+  <ul class="list-group list-group-flush">
+
+    <li class="list-group-item">Виробник: {{phone.manufacture}}</li>
+    <span id="span" class="hidden">{{phone.manufacture.get_manufacture_coeff}}</span>
+    <li class="list-group-item">Діагональ екрану: {{phone.screen}}</li>
+    <span id="span" class="hidden">{{phone.screen.get_screen_coefficient}}</span>
+    <li class="list-group-item">Кількість ядер: {{phone.cpu}}</li>
+    <span id='span' class='hidden'>{{phone.cpu.get_cpu_coefficient}}</span>
+    <li class="list-group-item">Пам'ять: {{phone.rom}}</li>
+    <span id='span' class='hidden'>{{phone.rom.get_rom_coefficient}}</span>
+    <li class="list-group-item">Камера: {{phone.cam}}</li>
+    <span id='span' class='hidden'>{{phone.cam.get_cam_coefficient}}</span>
+    <li class="list-group-item">Ємкість аккумулятору: {{phone.battary}}</li>
+    <span id='span' class='hidden'>{{phone.battary.get_battary_coefficient}}</span>
+    <li class="list-group-item">Ціна: {{phone.price}}</li>
+    <span id='span' class='hidden'>{{phone.price.get_price_coefficient}}</span>
+
+    
+    
+    
+  </ul>
+    
+  </div>
+</div>
+
+
+  {% endfor %}
+  </div>
+</div> 
+</div>
+{% load static %}
+<script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script>
+
+  $('.add').on('change', function(){
+            $(this).parent().find('output').text($(this).val());
+            
+    });
+
+
+</script>
+{% endblock %}
+
